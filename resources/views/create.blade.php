@@ -29,3 +29,4 @@
   </div>
   <input type="submit" value="Spara Produkt" class="btn btn-success">
 </form>
+@endsection

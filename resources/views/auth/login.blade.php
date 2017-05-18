@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="top-right links">
+
+    
+        <a href="{{ url('/products') }}">Tillbaka till första sidan</a>
+
+
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -23,6 +30,9 @@
                                 @endif
                             </div>
                         </div>
+
+
+
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>

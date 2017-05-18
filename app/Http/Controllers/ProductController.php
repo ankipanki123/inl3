@@ -16,7 +16,7 @@ class ProductController extends Controller
 
      public function __construct()
          {
-             $this->middleware('auth', ['except' => ['index','show']]);
+               $this->middleware('auth', ['except' => ['index','show']]);
          }
 
     public function index()
@@ -53,6 +53,16 @@ class ProductController extends Controller
         $product->description = $request->get("description");
         $product->save();
 
+        $product_id = DB::connection()->getPdo()->lastInsertId();
+              foreach ($request->get("stores") as $store) {
+                  DB::table('product_store')->insert(
+                    [
+                      "product_id" => $product_id,
+                      "store_id" => $store
+                    ]
+                  );
+              }
+
 
         return redirect()-> action('ProductController@index')->with('status', 'Produkten är sparad');
 
@@ -67,6 +77,8 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $product->stores = $product->stores;
+        $product->reviews = $product->reviews;
         return view("show", [
           "product" => $product
         ]);
@@ -81,7 +93,14 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view("edit", [
+          "product" => $product
+        ]);
+
+
+
+        return redirect()->action('ProductController@index')->with('status', 'Produkt Uppdaterad');
     }
 
     /**
@@ -93,7 +112,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        $product->title = $request->get("title");
+        $product->brand = $request->get("brand");
+        $product->price = $request->get("price");
+        $product->description = $request->get("description");
+        $product->image = $request->get("image");
+        $product->save();
+
+
+        return redirect()-> action('ProductController@index')->with('status', 'Produkten är Uppdaterad');
+
     }
 
     /**

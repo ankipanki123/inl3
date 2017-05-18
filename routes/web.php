@@ -14,6 +14,9 @@
 
 
 Route::resource('/products', 'ProductController');
+Route::resource('/stores', 'StoreController');
+Route::resource('/reviews', 'ReviewController');
+
 
 Route::get('/', function () {
     return view('welcome');

@@ -31,8 +31,22 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="/products">Start</a></li>
+        <li><a href="/stores">Affärer</a></li>
+        <li><a href="/reviews/create">Lägg till review</a></li>
         <li><a href="/products/create">Lägg till produkt</a></li>
+      
       </ul>
+      @if (Route::has('login'))
+          <div class="top-right links">
+              @if (Auth::check())
+                  <a href="{{ url('/home') }}">Home</a>
+              @else
+                  <a href="{{ url('/login') }}">Login</a>
+                  <a href="{{ url('/products') }}">telefonsida</a>
+                  <a href="{{ url('/register') }}">Register</a>
+              @endif
+          </div>
+      @endif
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
