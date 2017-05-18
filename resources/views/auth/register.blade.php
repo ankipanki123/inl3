@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="top-right links">
+
+    
+        <a href="{{ url('/products') }}">Tillbaka till första sidan</a>
+
+
+</div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
